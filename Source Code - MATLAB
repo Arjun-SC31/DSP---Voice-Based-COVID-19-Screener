@@ -1,0 +1,29 @@
+Source Code: Currently in development.
+
+%ECE-2006-DSP Project -Voice Based COVID-19 Detector:
+%Arjun Sharma 18BEC1117 and,
+%Aadithya Srinivasan 18BEC1285
+clc
+clear all
+Fs = 10000; % of sample frequency
+NoB = 8; % of bits per sample
+NoC = 1; % of channels (mono)
+recording = audiorecorder (Fs, NoB, NoC); % Recording parameters
+disp ('Start talking now! Recording...');
+record (recording); % Recording started
+pause (5); % Recording ends
+stop (recording);
+disp ('End of Recording, playing the audio: ');
+play (recording);
+recordata = getaudiodata (recording);
+
+%Plot the Oscillogram
+figure(1)
+plot(recordata) %plot the oscillogram. Y - amplitude, X - Samples
+grid
+
+%Plot the Spectrogram
+fastft = fft (recordata);
+figure(2)
+plot (abs(fastft)) %plot the spectrum. Y - Frequency, X - Samples
+grid
